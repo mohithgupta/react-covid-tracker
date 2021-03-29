@@ -38,7 +38,7 @@ const Info = ({ data: { confirmed, recovered, deaths, lastUpdate } }) => {
           cardTitle="Active"
           value={confirmed.value-deaths.value-recovered.value}
           lastUpdate={lastUpdate}
-          cardSubtitle="Number of active cases of COVID-19."
+          cardSubtitle="Number of Active cases of COVID-19 today."
         />
       </Grid>
     </div>
