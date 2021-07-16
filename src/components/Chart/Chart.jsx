@@ -8,26 +8,28 @@ import styles from './Chart.module.css';
 const Chart = ({ data: { confirmed, recovered, deaths }, country }) => {
   const [dailyData, setDailyData] = useState({});
 
-  useEffect(() => {
-    const fetchMyAPI = async () => {
+  useEffect(() => { 
+    
+    const getinitialdata = async () => {
+      
       const initialDailyData = await fetchDailyData();
-
       setDailyData(initialDailyData);
-    };
+      // console.log(initialDailyData);
+    }
 
-    fetchMyAPI();
-  }, []);
+    getinitialdata();
+  }, [country]);
 
   const barChart = (
     confirmed ? (
       <Bar
         data={{
-          labels: ['Infected', 'Active', 'Recovered'],
+          labels: ['Infected', 'Recovered','Deaths', 'Active'],
           datasets: [
             {
               label: 'People',
-              backgroundColor: ['rgba(0, 0, 0, 0.7)', 'rgba(0, 0, 255, 0.7)', 'rgba(0, 255, 0, 0.7)', 'rgba(255, 0, 0, 0.8)'],
-              data: [confirmed.value,confirmed.value- recovered.value-deaths.value, recovered.value, deaths.value],
+              backgroundColor: ['rgba(0, 0, 0, 0.7)',  'rgba(0, 255, 0, 0.7)','rgba(255, 0, 0, 0.7)', 'rgba(0, 0, 255, 0.7)' ],
+              data: [confirmed.value, recovered.value, deaths.value, confirmed.value-recovered.value-deaths.value ],
             },
           ],
         }}
@@ -46,19 +48,20 @@ const Chart = ({ data: { confirmed, recovered, deaths }, country }) => {
       <Line
         data={{
           labels: dailyData.map(({ date }) => date),
-          datasets: [{
-            data: dailyData.map((data) => data.confirmed),
-            label: 'Infected',
-            borderColor: 'rgba(0,0,0,0.8)',
-            backgroundColor: 'rgba(0, 0, 0, 0.4)',
-            fill: true,
-          },{
-            data: dailyData.map((data) => data.deaths),
-            label: 'Deaths',
-            borderColor: 'red',
-            backgroundColor: 'rgba(255, 0, 0, 0.5)',
-            fill: true,
-          },
+          datasets: [
+              {
+                data: dailyData.map((data) => data.confirmed),
+                label: 'Infected',
+                borderColor: 'rgba(0,0,0,0.8)',
+                backgroundColor: 'rgba(0, 0, 0, 0.4)',
+                fill: true,
+            },{
+                data: dailyData.map((data) => data.deaths),
+                label: 'Deaths',
+                borderColor: 'red',
+                backgroundColor: 'rgba(255, 0, 0, 0.5)',
+                fill: true,
+            },
           ],
         }}
         options={{

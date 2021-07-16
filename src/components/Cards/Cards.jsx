@@ -5,26 +5,27 @@ import CardComponent from './Card/Card';
 import styles from './Cards.module.css';
 
 const Info = ({ data: { confirmed, recovered, deaths, lastUpdate } }) => {
+
   if (!confirmed) {
     return 'Loading...';
   }
 
   return (
     <div className={styles.container}>
-      <Grid container spacing={3} justify="center">
+      <Grid container spacing={6} justify="center">
         <CardComponent
           className={styles.infected}
           cardTitle="Infected"
           value={confirmed.value}
           lastUpdate={lastUpdate}
-          cardSubtitle="Number of infected cases from COVID-19."
+          cardSubtitle="Number of people infected by COVID-19."
         />
         <CardComponent
           className={styles.recovered}
           cardTitle="Recovered"
           value={recovered.value}
           lastUpdate={lastUpdate}
-          cardSubtitle="Number of recoveries from COVID-19."
+          cardSubtitle="Number of people recovered from COVID-19."
         />
         <CardComponent
           className={styles.deaths}
@@ -37,7 +38,6 @@ const Info = ({ data: { confirmed, recovered, deaths, lastUpdate } }) => {
           className={styles.active}
           cardTitle="Active"
           value={confirmed.value-deaths.value-recovered.value}
-          lastUpdate={lastUpdate}
           cardSubtitle="Number of Active cases of COVID-19 today."
         />
       </Grid>
