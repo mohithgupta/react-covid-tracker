@@ -27,6 +27,11 @@ const App = () => {
     return (
       <div className={styles.container}>
         <img className={styles.image} src={image} alt="COVID-19" />
+        <div style={{"color":"red", "font-size" : "1.2rem"}}><strong>DISCLAIMER:</strong> The API has been providing <b>faulty info</b> since a couple of days (from around 10th of August) <br />
+        so please do not take these values as reference. I will not be updating the code as I'm quite busy right now <br /> but I will update it as soon as I find some time. Thank you. </div>
+        <br />
+        <br />
+        <br />
         <Cards data={data} />
         <CountryPicker handleCountryChange={handleCountryChange}/>
         <Chart data={data} country={country} /> 
